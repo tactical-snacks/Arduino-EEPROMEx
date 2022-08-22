@@ -26,7 +26,7 @@
  * Definitions
  ******************************************************************************/
 
- #define _EEPROMEX_VERSION 1_0_0 // software version of this library
+ #define _EEPROMEX_VERSION 1_0_1 // software version of this library
  //#define _EEPROMEX_DEBUG         // Enables logging of maximum of writes and out-of-memory
 /******************************************************************************
  * Constructors
@@ -99,7 +99,11 @@ int EEPROMClassEx::getAddress(int noOfBytes){
  * Check if EEPROM memory is ready to be accessed
  */
 bool EEPROMClassEx::isReady() {
+#if defined(ARDUINO_ARCH_MEGAAVR) //work around a bug in <avr/eeprom.h>
+	return bit_is_clear(NVMCTRL.STATUS,NVMCTRL_EEBUSY_bp);
+#else
 	return eeprom_is_ready();
+#endif
 }
 
 /**
