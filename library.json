@@ -1,6 +1,7 @@
 {
   "name": "EEPROMEx",
   "keywords": "eeprom",
+  "version": "1.1.1",
   "description": "Extension of the standard Arduino EEPROM library for reading and writing basic types, structs, strings, arrays and more.",
   "authors":
   [
